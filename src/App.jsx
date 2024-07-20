@@ -340,24 +340,6 @@ function App() {
     }
   }, [isPersonaClientStarted, initializePersonaClient]);
 
-  // const [level, setLevel] = useState(1);
-  // const [progress, setProgress] = useState(0);
-  
-  // const value = {
-  //   feedback,
-  //   setFeedback,
-  //   question,
-  //   setQuestion,
-  //   example,
-  //   setExample,
-  //   learningUpdate,
-  //   setLearningUpdate,
-  //   isPersonaClientStarted,
-  //   level,
-  //   setLevel,
-  //   progress,
-  //   setProgress
-  // };
 
   const handleCorrectResponse = useCallback(() => {
     setProgress(prev => {
@@ -375,6 +357,8 @@ function App() {
       handleCorrectResponse();
     }
   }, [feedback, handleCorrectResponse]);
+
+  console.log('IS PERSONA CLIENT STARTED', isPersonaClientStarted)
 
   const value = {
     feedback,
@@ -445,7 +429,7 @@ function App() {
         >
           {isPersonaClientStarted ? "Persona Client Started" : "Start Persona Client"}
         </motion.button>
-        <PersonaComponent init={isPersonaClientStarted} />
+        <PersonaComponent isPersonaClientStarted={isPersonaClientStarted} />
         <div style={{ marginTop: '80px' }}>
           { feedback ? (
             <div className="feedback-container">
@@ -469,6 +453,7 @@ function App() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
+                  style={{ fontSize: '24px' }} // Increased font size
                 >
                   {question.question_text}
                 </motion.div>

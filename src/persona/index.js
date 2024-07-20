@@ -16,7 +16,7 @@ const config = {
   interjections: {
     enabled: true,
     minWait: 5000,
-    maxWait: 7500,
+    maxWait: 5500,
     // thought: `There was just a pause; I should keep the conversation going.`
     thought: `There was just a pause; The user may be thinking, I should give them a little time before following up`
   },
