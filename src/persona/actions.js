@@ -159,7 +159,20 @@ const actions = {
     "provide_feedback": {
       "_description": "When feedback is given to the student",
       "type": "object",
-      "_examples": [],
+      "_examples": [
+        {
+          "assistant action includes": {
+            "provide_feedback": {
+              "feedback_type": "positive",
+              "message": "Well done! Let's move on to the next question."
+            },
+            "ask_question": {
+              "question_type": "open_ended",
+              "question_text": "What is Apple in spanish?",
+            }
+          }
+        }
+      ],
       "properties": {
         "feedback_type": {
           "type": "string",

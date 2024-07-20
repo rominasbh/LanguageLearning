@@ -369,7 +369,7 @@ function App() {
       return newProgress;
     });
   }, [setProgress, setLevel]);
-  
+
   useEffect(() => {
     if (feedback && feedback.feedback_type === 'positive') {
       handleCorrectResponse();
