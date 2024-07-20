@@ -103,3 +103,20 @@ body {
 .info-part p {
   font-size: 0.9rem; /* Decrease font-size */
 }
+
+.level-meter {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 200px;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #76c7c0;
+  transition: width 0.5s ease-in-out;
+}

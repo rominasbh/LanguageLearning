@@ -314,6 +314,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, createContext, useState, useCallback } from "react";
 import PersonaComponent from "./components/Persona";
+import LevelMeter from './components/levelMeter';
 
 
 // Create context
@@ -325,6 +326,8 @@ function App() {
   const [question, setQuestion] = useState(null);
   const [example, setExample] = useState(null);
   const [learningUpdate, setLearningUpdate] = useState(null);
+  const [level, setLevel] = useState(1);
+  const [progress, setProgress] = useState(0);
 
   const initializePersonaClient = useCallback(() => {
     console.log('Persona Client initialized');
@@ -337,6 +340,42 @@ function App() {
     }
   }, [isPersonaClientStarted, initializePersonaClient]);
 
+  // const [level, setLevel] = useState(1);
+  // const [progress, setProgress] = useState(0);
+  
+  // const value = {
+  //   feedback,
+  //   setFeedback,
+  //   question,
+  //   setQuestion,
+  //   example,
+  //   setExample,
+  //   learningUpdate,
+  //   setLearningUpdate,
+  //   isPersonaClientStarted,
+  //   level,
+  //   setLevel,
+  //   progress,
+  //   setProgress
+  // };
+
+  const handleCorrectResponse = useCallback(() => {
+    setProgress(prev => {
+      const newProgress = prev + 1;
+      if (newProgress >= 10) {
+        setLevel(prev => prev + 1);
+        return 0;
+      }
+      return newProgress;
+    });
+  }, [setProgress, setLevel]);
+  
+  useEffect(() => {
+    if (feedback && feedback.feedback_type === 'positive') {
+      handleCorrectResponse();
+    }
+  }, [feedback, handleCorrectResponse]);
+
   const value = {
     feedback,
     setFeedback,
@@ -346,7 +385,11 @@ function App() {
     setExample,
     learningUpdate,
     setLearningUpdate,
-    isPersonaClientStarted
+    isPersonaClientStarted,
+    level,
+    setLevel,
+    progress,
+    setProgress
   };
 
   console.log('starting up...');
@@ -447,6 +490,10 @@ function App() {
             </div>
           ) : null}
         </div>
+        <div className="level-meter">
+          <div className="progress-bar" style={{ width: `${progress * 10}%` }}></div>
+        </div>
+        <LevelMeter/>
       </div>
     </LearningContext.Provider>
   );
